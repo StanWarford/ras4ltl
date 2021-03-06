@@ -1,4 +1,4 @@
-# A Revised Axiomatic System for Lineear Temporal Logic
+# A Revised Axiomatic System for Linear Temporal Logic
 
 Calculational deductive systems, developed by Dijkstra and Scholten and extended by Gries and Schneider, are based on only four inference rules -- Substitution, Leibniz, Equanimity, and Transitivity.
 The paper, A Calculational Deductive System for Linear Temporal Logic (CDS4LTL), is a survey of the linear temporal logic (LTL) literature and presents all the LTL theorems from the survey, plus many new ones, in a calculational deductive system.
