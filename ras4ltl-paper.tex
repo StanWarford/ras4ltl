@@ -5,6 +5,11 @@
 
 \documentclass[12pt, fleqn, leqno]{article}
 
+%
+% Bibliography
+\usepackage[backend=biber, style=numeric]{biblatex}
+\addbibresource{ras4ltl-paper.bib}
+
 \usepackage{fontspec}
 \usepackage[slantedGreek]{mathptmx}
 \usepackage{amsmath, amsthm, amssymb,latexsym}
@@ -93,11 +98,12 @@
 
 \author{
    John Wiegley\\
-   Affiliation\\
+   DFINITY\\
+   West Sacramento, CA 95691
    \and
    Scott M. Staley\\
    Ford Motor Company Research Labs (retired)\\
-   Dearborn, MI 48124
+   Seattle, WA 98198
    \and
    J. Stanley Warford\\
    Computer Science Department\\
@@ -6148,7 +6154,10 @@ Mordechai Ben-Ari's text \cite{Ben2} inspired us to use LTL to teach concurrent 
 Fred Schneider's graduate-level text \cite{Schn} inspired us to create this calculational system to be accessible at the undergraduate level.
 Ray McIntyre, Ravi Mohan, Michael Ortiz, and Kyle Sundman contributed to the proofs.
 
-\bibliographystyle{plain}
-\bibliography{ras4ltl-paper}
+\section{References}
+
+%\bibliographystyle{plain}
+%\bibliography{ras4ltl-paper}
+\printbibliography[heading=none]
 
 \end{document}
