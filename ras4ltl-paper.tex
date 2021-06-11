@@ -2983,7 +2983,7 @@ Proofs of the catenation rules (\ref{E:EventCatRule}), (\ref{E:AlwaysCatRule}), 
     \> \>   $ (p \impl q) \land (q \impl \Event r) \land \Always (r \impl s)$\\[\lgap]
     \> $\impl$  \>  \Hint{(3.82a) Transitivity and (4.3) Monotonicity of $\land$}\\[\lgap]
      \> \>   $ (p \impl \Event r) \land \Always (r \impl s)$\\[\lgap]
-     \> $\impl$ \> \Hint{(\ref{E:alwaysImpEvents}) Monotonicity of $\Event$ and (4.3) Monotonicity of $\land$} \\[\lgap]
+  \> $\impl$ \> \Hint{(\ref{E:alwaysImpEvents}) Monotonicity of $\Event$ and (4.3) Monotonicity of $\land$} \\[\lgap]
   \> \>   $ (p \impl \Event r) \land (\Event r \impl \Event s)$\\[\lgap]
   \> $\impl$  \>  \Hint{(3.82a) Transitivity}\\[\lgap]
   \> \>   $ p \impl \Event s$\quad \myqed
@@ -6094,6 +6094,52 @@ And now,
   \> $=$  \>  \Hint{(\ref{E:waitOrdering}) $\Wait$ ordering with $p,q:=\Always p, \Always q$}\\[\lgap]
   \> \> \textit{true} \quad \myqed
 \end{tabbing}
+
+\pagebreak
+\textbf{LTL Program property proof example for CS340d}
+
+\begin{equation}\label{E:Artale-1}
+\textbf{example:}\quad \Always ((p \impl  \Event q) \land (q \impl \Next r) \land (r \impl \Event \Always s)) \impl (\Always p \impl \Event s)
+\end{equation}
+\opt{complete}{
+\emph{Proof}:
+\begin{tabbing}
+\hspace{\mymathindent} \= $= \;$ \= \myqedtab \= \kill
+  \> \>   $ \Always ( (p \impl  \Event q) \land (q \impl \Next r) \land (r \impl \Event \Always s)) \impl (\Always p \impl \Event s)$\\[\lgap]
+   \> $=$  \>  \Hint{(\ref{E:distAlwaysAnd}) Distributivity of $\Always$ over $\land$}\\[\lgap]
+  \> \>   $ \Always (p \impl  \Event q) \land \Always (q \impl \Next r) \land \Always (r \impl \Event \Always s) \impl (\Always p \impl \Event s)$\\[\lgap]
+    \> $=$  \>  \Hint{(3.65) Shunting, $p\land q\impl r\equivs p\impl (q\impl r)$}\\[\lgap]
+   \> \>   $ \Always (p \impl  \Event q) \land \Always (q \impl \Next r) \land \Always (r \impl \Event \Always s) \land \Always p \impl \Event s$\\[\lgap]
+\end{tabbing}
+And now,
+\begin{tabbing}
+\hspace{\mymathindent} \= $= \;$ \= \myqedtab \= \kill
+   \> \>   $ \Always (p \impl  \Event q) \land \Always (q \impl \Next r) \land \Always (r \impl \Event \Always s) \land \Always p$\\[\lgap]
+   \> $\impl$  \>  \Hintfirst{(\ref{E:nextEvent}) Weakening of $\Event$ and (3.82a) Transitivity and}\\[\lgap]
+     \>  \>  \Hintlast{(\ref{E:distAlwaysImp}) Monotonicity of $\Always$ and (4.3) Monotonicity of $\land$}\\[\lgap]
+   \> \>   $ \Always (p \impl  \Event q) \land \Always (q \impl \Event r) \land \Always (r \impl \Event \Always s) \land \Always p$\\[\lgap]
+   \> $\impl$ \> \Hint{(\ref{E:EventCatRule}) Catenation rule of $\Event$ and (4.3) Monotonicity of $\land$} \\[\lgap]
+    \> \>   $(p \impl  \Event r) \land \Always (r \impl \Event \Always s) \land \Always p$\\[\lgap]
+     \> $\impl$  \>  \Hint{(\ref{E:impAlways}) Strengthening of $\Always$ and (4.3) Monotonicity of $\land$}\\[\lgap]
+         \> \>   $(p \impl  \Event r) \land \Always (r \impl \Event \Always s) \land p$\\[\lgap]
+      \> $=$ \> \Hint{(3.36) Symmetry of $\land$, $p\land q \equiv q\land p$, twice} \\[\lgap]
+        \> \>   $p \land (p \impl  \Event r) \land \Always (r \impl \Event \Always s)$\\[\lgap]
+ \> $\impl$  \>  \Hint{(3.77) Modus ponens, $p\land (p\impl q)\impl q$ and (4.3) Monotonicity of $\land$}\\[\lgap]
+       \> \>   $\Event r \land \Always (r \impl \Event \Always s)$\\[\lgap]
+        \> $\impl$ \> \Hint{(\ref{E:alwaysImpEvents}) Monotonicity of $\Event$ and (4.3) Monotonicity of $\land$} \\[\lgap]
+  \> \>   $\Event r \land (\Event r \impl \Event \Event \Always s)$\\[\lgap]
+ \> $=$  \>  \Hint{(\ref{E:IdemEvent}) Absorption of $\Event$}\\[\lgap]
+  \> \>   $\Event r \land (\Event r \impl \Event \Always s)$\\[\lgap]
+  \> $\impl$  \>  \Hint{(3.77) Modus ponens, $p\land (p\impl q)\impl q$}\\[\lgap]
+    \> \>   $\Event \Always s$\\[\lgap]
+   \> $\impl$ \> \Hintfirst{(\ref{E:impAlwaysE}) Strengthening of $\Always$ and (\ref{E:alwaysImpEvents}) Monotonicity of $\Event$ }\\[\lgap]
+  \> $$ \> \Hintlast{ and (\ref{E:IdemEvent}) Absorption of $\Event$} \\[\lgap]
+  \> \>   $\Event s$\quad \myqed
+\end{tabbing}
+}
+
+\pagebreak
+
 
 The ten axioms that define the behavior of the \textit{until} operator are (\ref{E:distNextUntil}), (\ref{E:expansionUntil}), (\ref{E:untilFalse}), (\ref{E:untilOrEquiv}), (\ref{E:untilOrImp}), (\ref{E:untilAndImp}), (\ref{E:untilAndEquiv}), (\ref{E:untilImplicationOrdering}), (\ref{E:leftAssocUntil}), and (\ref{E:rightAssocUntil}).
 The corresponding theorems for the \textit{wait} operator are (\ref{E:waitNextDist}), (\ref{E:expansionWait}), (\ref{E:alwaysAsWait}), (\ref{E:waitOrDist}), (\ref{E:rightWaitOrDist}), (\ref{E:leftWaitAndDist}), (\ref{E:rightWaitAndDist}), (\ref{E:waitImplicationOrdering}), (\ref{E:leftAssocWait}), and (\ref{E:rightAssocWait}).
